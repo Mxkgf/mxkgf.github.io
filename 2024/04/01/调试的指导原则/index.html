@@ -19,29 +19,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"mxkgf.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Amdahl定理 当我们对系统的某个部分加速时，其对系统整体性能的影响取决于该部分的重要性和加速程度。要想显著加速整个系统，必须提升全系统中相当大的部分的速度。  并发和并行 线程级并发 指令级并行 单指令、多数据并行  概念 并发 (concurrency)指一个同时具有多个活动的系统; 并行 (parallelism)指的是用并发来使一个系统运行得更快  计算机系统中抽象的重要性 文件是对I&#x2F;">
+    <meta name="description" content="调试的指导原则 增量测试：每个编写良好的程序都由可以单独测试的小型模块化组件组成。尽快尝试您编写的所有内容，以便及早发现问题并获得对组件的信心。 隔离错误：语句输出中的错误通常可归因于特定的模块化组件。尝试诊断问题时，请先将错误跟踪到最小的代码片段，然后再尝试更正错误。 检查你的假设：解释器确实不折不扣地执行你的指示——不多也不少。当某些代码的行为与你认为的行为不匹配时，检查您的假设，然后将调试工">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机系统漫游">
-<meta property="og:url" content="http://mxkgf.github.io/2024/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/index.html">
+<meta property="og:title" content="调试的指导原则">
+<meta property="og:url" content="http://mxkgf.github.io/2024/04/01/%E8%B0%83%E8%AF%95%E7%9A%84%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Amdahl定理 当我们对系统的某个部分加速时，其对系统整体性能的影响取决于该部分的重要性和加速程度。要想显著加速整个系统，必须提升全系统中相当大的部分的速度。  并发和并行 线程级并发 指令级并行 单指令、多数据并行  概念 并发 (concurrency)指一个同时具有多个活动的系统; 并行 (parallelism)指的是用并发来使一个系统运行得更快  计算机系统中抽象的重要性 文件是对I&#x2F;">
+<meta property="og:description" content="调试的指导原则 增量测试：每个编写良好的程序都由可以单独测试的小型模块化组件组成。尽快尝试您编写的所有内容，以便及早发现问题并获得对组件的信心。 隔离错误：语句输出中的错误通常可归因于特定的模块化组件。尝试诊断问题时，请先将错误跟踪到最小的代码片段，然后再尝试更正错误。 检查你的假设：解释器确实不折不扣地执行你的指示——不多也不少。当某些代码的行为与你认为的行为不匹配时，检查您的假设，然后将调试工">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-02-10T03:13:00.000Z">
-<meta property="article:modified_time" content="2024-02-15T10:02:48.920Z">
+<meta property="article:published_time" content="2024-04-01T05:49:00.000Z">
+<meta property="article:modified_time" content="2024-04-02T10:42:15.536Z">
 <meta property="article:author" content="马晓康">
 <meta property="article:tag" content="计算机">
-<meta property="article:tag" content="操作系统">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="cs61a">
+<meta property="article:tag" content="debug">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://mxkgf.github.io/2024/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/">
+<link rel="canonical" href="http://mxkgf.github.io/2024/04/01/%E8%B0%83%E8%AF%95%E7%9A%84%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh_CN","comments":true,"permalink":"http://mxkgf.github.io/2024/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/","path":"2024/02/10/计算机系统漫游/","title":"计算机系统漫游"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh_CN","comments":true,"permalink":"http://mxkgf.github.io/2024/04/01/%E8%B0%83%E8%AF%95%E7%9A%84%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99/","path":"2024/04/01/调试的指导原则/","title":"调试的指导原则"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>计算机系统漫游 | Hexo</title>
+<title>调试的指导原则 | Hexo</title>
   
 
 
@@ -113,7 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Amdahl%E5%AE%9A%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Amdahl定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">并发和并行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%8A%BD%E8%B1%A1%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">计算机系统中抽象的重要性</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E8%AF%95%E7%9A%84%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">调试的指导原则</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -169,7 +171,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh_CN">
-    <link itemprop="mainEntityOfPage" href="http://mxkgf.github.io/2024/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/">
+    <link itemprop="mainEntityOfPage" href="http://mxkgf.github.io/2024/04/01/%E8%B0%83%E8%AF%95%E7%9A%84%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -182,12 +184,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="计算机系统漫游 | Hexo">
+      <meta itemprop="name" content="调试的指导原则 | Hexo">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          计算机系统漫游
+          调试的指导原则
         </h1>
 
         <div class="post-meta-container">
@@ -198,14 +200,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2024-02-10 11:13:00" itemprop="dateCreated datePublished" datetime="2024-02-10T11:13:00+08:00">2024-02-10</time>
+      <time title="Created: 2024-04-01 13:49:00" itemprop="dateCreated datePublished" datetime="2024-04-01T13:49:00+08:00">2024-04-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-02-15 18:02:48" itemprop="dateModified" datetime="2024-02-15T18:02:48+08:00">2024-02-15</time>
+      <time title="Modified: 2024-04-02 18:42:15" itemprop="dateModified" datetime="2024-04-02T18:42:15+08:00">2024-04-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -213,11 +215,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
         </span>
     </span>
 
@@ -230,23 +228,11 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h3 id="Amdahl定理"><a href="#Amdahl定理" class="headerlink" title="Amdahl定理"></a><a href="Amdahl定理">Amdahl定理</a></h3><blockquote>
-<p>当我们对系统的某个部分加速时，其对系统整体性能的影响取决于该部分的重要性和加速程度。要想显著加速整个系统，必须提升全系统中相当大的部分的速度。</p>
-</blockquote>
-<h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><ol>
-<li>线程级并发</li>
-<li>指令级并行</li>
-<li>单指令、多数据并行</li>
-</ol>
-<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ol>
-<li>并发 (concurrency)指一个同时具有多个活动的系统;</li>
-<li>并行 (parallelism)指的是用并发来使一个系统运行得更快</li>
-</ol>
-<h3 id="计算机系统中抽象的重要性"><a href="#计算机系统中抽象的重要性" class="headerlink" title="计算机系统中抽象的重要性"></a>计算机系统中抽象的重要性</h3><ol>
-<li>文件是对<code>I/0</code>设备的抽象</li>
-<li>虚拟内存是对程序存储器的抽象</li>
-<li>进程是对一个正在运行的程序的抽象</li>
-<li>虚拟机，它提供对整个计算机的抽象，包括操作系统、处理器和程序</li>
+    <div class="post-body" itemprop="articleBody"><h3 id="调试的指导原则"><a href="#调试的指导原则" class="headerlink" title="调试的指导原则"></a>调试的指导原则</h3><ol>
+<li><strong>增量测试</strong>：每个编写良好的程序都由可以单独测试的小型模块化组件组成。尽快尝试您编写的所有内容，以便及早发现问题并获得对组件的信心。</li>
+<li><strong>隔离错误</strong>：语句输出中的错误通常可归因于特定的模块化组件。尝试诊断问题时，请先将错误跟踪到最小的代码片段，然后再尝试更正错误。</li>
+<li><strong>检查你的假设</strong>：解释器确实不折不扣地执行你的指示——不多也不少。当某些代码的行为与你认为的行为不匹配时，检查您的假设，然后将调试工作重点放在验证您的假设是否确实成立上。</li>
+<li><strong>咨询他人</strong>：如果您不理解错误消息，请咨询朋友、教师或搜索引擎。如果您已经隔离了一个错误，但不知道如何纠正它，请让其他人查看。</li>
 </ol>
 
     </div>
@@ -258,21 +244,20 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
-              <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag"># 操作系统</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/cs61a/" rel="tag"># cs61a</a>
+              <a href="/tags/debug/" rel="tag"># debug</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/11/21/The%20C%20Programming%20Langue%20%E7%BB%83%E4%B9%A0/" rel="prev" title="The C Programming Langue 练习">
-                  <i class="fa fa-angle-left"></i> The C Programming Langue 练习
+                <a href="/2024/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/" rel="prev" title="计算机系统漫游">
+                  <i class="fa fa-angle-left"></i> 计算机系统漫游
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/04/01/%E8%B0%83%E8%AF%95%E7%9A%84%E6%8C%87%E5%AF%BC%E5%8E%9F%E5%88%99/" rel="next" title="调试的指导原则">
-                  调试的指导原则 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
