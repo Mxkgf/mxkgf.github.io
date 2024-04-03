@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -154,6 +154,116 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://mxkgf.github.io/2024/04/03/%E5%AE%9A%E4%B9%89%E6%96%B0%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="马晓康">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="天行健，君子以自强不息">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/03/%E5%AE%9A%E4%B9%89%E6%96%B0%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">调试的指导原则</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-04-03 18:49:00 / Modified: 19:04:12" itemprop="dateCreated datePublished" datetime="2024-04-03T18:49:00+08:00">2024-04-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="定义新函数"><a href="#定义新函数" class="headerlink" title="定义新函数"></a>定义新函数</h2><p><strong>如何定义一个函数</strong>。函数定义包括一个表示<name>的def语句和命名<formal parameters>的逗号分隔列表，然后是一个返回语句，称为函数主体，它指定了函数的<return expression>，这是一个在应用函数时要计算的表达式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> &lt;name&gt;(&lt;formal parameters&gt;):</span><br><span class="line">    <span class="keyword">return</span> &lt;<span class="keyword">return</span> expression&gt;</span><br></pre></td></tr></table></figure>
+<p>第二行必须缩进 — 大多数程序员使用四个空格来缩进。不会立即计算返回表达式;它存储为新定义的函数的一部分，并且仅在最终应用该函数时进行计算。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">x</span>):</span><br><span class="line">        <span class="keyword">return</span> mul(x, x)</span><br></pre></td></tr></table></figure>
+<p>定义 <code>square</code> 后，我们可以用调用表达式来应用它：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>square(<span class="number">21</span>)</span><br><span class="line"><span class="number">441</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>square(add(<span class="number">2</span>, <span class="number">5</span>))</span><br><span class="line"><span class="number">49</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>square(square(<span class="number">3</span>))</span><br><span class="line"><span class="number">81</span></span><br></pre></td></tr></table></figure>
+<p>我们也可以用作 <code>square</code> 定义其他函数的构建块。例如，我们可以很容易地定义一个函数<code>sum_squares</code>，该函数给定任意两个数字作为参数，返回它们的平方和：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">sum_squares</span>(<span class="params">x, y</span>):</span><br><span class="line">        <span class="keyword">return</span> add(square(x), square(y))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sum_squares(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="number">25</span></span><br></pre></td></tr></table></figure>
+<p>用户定义函数的使用方式与内置函数完全相同。事实上，从sum_squares的定义中无法判断 <code>square</code> 是内置在解释器中、从模块导入还是由用户定义的。</p>
+<p><code>def</code>语句和赋值语句都将名称绑定到值，并且任何现有绑定都将丢失。例如，下面的g首先是指没有参数的函数，然后是一个数字，然后是两个参数的不同函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">g</span>():</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g()</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g = <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">g</span>(<span class="params">h, i</span>):</span><br><span class="line">        <span class="keyword">return</span> h + i</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h3 id="局部名称"><a href="#局部名称" class="headerlink" title="局部名称"></a>局部名称</h3><p>函数实现中不应影响函数行为的一个细节是实现者为函数的形式参数选择的名称。因此，以下函数应提供相同的行为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">x</span>):</span><br><span class="line">        <span class="keyword">return</span> mul(x, x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">y</span>):</span><br><span class="line">        <span class="keyword">return</span> mul(y, y)</span><br></pre></td></tr></table></figure>
+<p>这一原则——函数的含义应独立于其作者选择的参数名称——对编程语言具有重要影响。最简单的结果是，函数的参数名称必须保持函数主体的局部位置。</p>
+<p>如果参数不是其各自函数的主体的局部参数，则 <code>x</code> 中的 <code>square</code> 参数可能会与 <code>x</code> 中的 <code>sum_squares</code> 参数混淆。至关重要的是，情况并非如此：不同局部帧 <code>x</code> 中的绑定是无关的。计算模型经过精心设计，以确保这种独立性。</p>
+<p>我们说局部名称的范围仅限于定义它的用户定义函数的主体。当某个名称无法再访问时，它就超出了范围。这种范围界定行为并不是我们模型的新事实;这是环境工作方式的结果。</p>
+<h3 id="选择名称"><a href="#选择名称" class="headerlink" title="选择名称"></a>选择名称</h3><p>名称的可互换性并不意味着正式的参数名称根本不重要。相反，精心选择的函数和参数名称对于函数定义的人类可解释性至关重要！</p>
+<p>以下指南改编自 Python 代码的风格指南，该指南可作为所有（非叛逆的）Python 程序员的指南。一组共享的约定使开发人员社区成员之间的通信顺畅。作为遵循这些约定的副作用，您会发现您的代码变得更加内部一致。</p>
+<ol>
+<li>函数名称为小写，单词之间用下划线分隔。鼓励使用描述性名称。</li>
+<li>函数名通常唤起由解释器应用于参数的操作（例如，print，add，square）或结果数量的名称（例如，max，abs，sum）。</li>
+<li>参数名称为小写，单词之间用下划线分隔。最好使用单字名称。</li>
+<li>参数名称应唤起参数在函数中的作用，而不仅仅是允许的参数类型。</li>
+<li>当单字母参数名称的作用很明显时，它们是可以接受的，但要避免使用“l”（小写 L）、“O”（大写字母 o）或“I”（大写字母 i），以避免与数字混淆。</li>
+</ol>
+<p>这些准则有许多例外，即使在 Python 标准库中也是如此。就像英语的词汇一样，Python 继承了各种贡献者的单词，结果并不总是一致的。</p>
+<h3 id="作为抽象的函数"><a href="#作为抽象的函数" class="headerlink" title="作为抽象的函数"></a>作为抽象的函数</h3><p>虽然它非常简单，但sum_squares体现了用户定义函数最强大的属性。函数sum_squares是根据函数square定义的，但只依赖于square在其输入参数和输出值之间定义的关系。</p>
+<p>我们可以写作 <code>sum_squares</code> 而不用担心如何平方一个数字。可以抑制如何计算平方的细节，稍后再考虑。事实上，就 <code>sum_squares</code> 其而言， <code>square</code> 它不是一个特定的函数体，而是函数的抽象，即所谓的函数抽象。在这个抽象级别上，任何计算平方的函数都同样好。</p>
+<p>因此，仅考虑它们返回的值，以下两个用于对数字进行平方的函数应该是无法区分的。每个都接受一个数字参数，并生成该数字的平方作为值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">x</span>):</span><br><span class="line">        <span class="keyword">return</span> mul(x, x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">x</span>):</span><br><span class="line">        <span class="keyword">return</span> mul(x, x-<span class="number">1</span>) + x</span><br></pre></td></tr></table></figure>
+<p>换句话说，函数定义应该能够抑制细节。该函数的用户可能不是自己编写的函数，而是作为“黑匣子”从另一个程序员那里获得的。程序员不需要知道函数是如何实现的就可以使用它。Python 库具有此属性。许多开发人员使用那里定义的函数，但很少有人检查它们的实现。</p>
+<p><strong>函数抽象的各个方面</strong>。为了掌握函数抽象的使用，考虑它的三个核心属性通常是有用的。函数的域是它可以采用的参数集。函数的范围是它可以返回的值集。函数的意图是它计算输入和输出之间的关系（以及它可能产生的任何副作用）。通过函数抽象的域、范围和意图来理解函数抽象对于在复杂程序中正确使用它们至关重要。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
