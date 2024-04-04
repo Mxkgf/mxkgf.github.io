@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -154,6 +154,104 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://mxkgf.github.io/2024/04/04/%E8%AE%BE%E8%AE%A1%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="马晓康">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="天行健，君子以自强不息">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/04/%E8%AE%BE%E8%AE%A1%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">设计函数</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-04-04 18:49:00 / Modified: 20:27:12" itemprop="dateCreated datePublished" datetime="2024-04-04T18:49:00+08:00">2024-04-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="设计函数"><a href="#设计函数" class="headerlink" title="设计函数"></a>设计函数</h2><p>函数是所有程序（无论大小）的基本组成部分，并且是我们在编程语言中表达计算过程的主要媒介。从根本上说，好函数的特质都强化了函数是抽象的概念。</p>
+<ul>
+<li>每个函数都应该只有一个任务。该任务应该用一个简短的名称来识别，并可以在一行文本中描述。按顺序执行多个任务的函数应划分为多个函数。</li>
+<li>不要重复自己是软件工程的核心原则。所谓的 DRY 原则指出，多个代码片段不应描述冗余逻辑。相反，该逻辑应该实现一次，给定一个名称，并多次应用。如果你发现自己在复制和粘贴一个代码块，你可能已经找到了函数抽象的机会。</li>
+<li>函数应笼统定义。平方不在 Python 库中，正是因为它是 <code>pow</code> 函数的一个特例，它将数字提高到任意幂。</li>
+</ul>
+<p>这些准则提高了代码的可读性，减少了错误数，并且通常最大限度地减少了编写的代码总量。将复杂的任务分解为简洁的函数是一项需要经验才能掌握的技能。幸运的是，Python 提供了一些功能来支持您的工作。</p>
+<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>函数定义通常包括描述函数的文档，称为文档字符串，该文档字符串必须与函数主体一起缩进。文档字符串通常采用三重引号。第一行用一行描述了函数的工作。以下行可以描述参数并阐明函数的行为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">pressure</span>(<span class="params">v, t, n</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Compute the pressure in pascals of an ideal gas.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Applies the ideal gas law: http://en.wikipedia.org/wiki/Ideal_gas_law</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        v -- volume of gas, in cubic meters</span></span><br><span class="line"><span class="string">        t -- absolute temperature in degrees kelvin</span></span><br><span class="line"><span class="string">        n -- particles of gas</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        k = <span class="number">1.38e-23</span>  <span class="comment"># Boltzmann&#x27;s constant</span></span><br><span class="line">        <span class="keyword">return</span> n * k * t / v</span><br></pre></td></tr></table></figure>
+<p>当您使用函数的名称作为参数进行调用 <code>help</code> 时，您会看到其文档字符串（键入 <code>q</code> 以退出 Python 帮助）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">help</span>(pressure)</span><br></pre></td></tr></table></figure>
+<p>编写 Python 程序时，请包含除最简单函数之外的所有函数的文档字符串。请记住，代码只编写一次，但通常会读取多次。Python 文档包括文档字符串指南，用于在不同 Python 项目之间保持一致性。</p>
+<p>评论。Python 中的注释可以附加到 <code>#</code> 符号后面的一行的末尾。例如，上面的评论 <code>Boltzmann&#39;s constant</code> 描述了 <code>k</code> .这些注释永远不会出现在 Python 的 <code>help</code> 中，并且它们会被解释器忽略。它们只为人类而存在。</p>
+<h3 id="默认参数值"><a href="#默认参数值" class="headerlink" title="默认参数值"></a>默认参数值</h3><p>定义一般函数的一个后果是引入了额外的参数。带有许多参数的函数可能很难调用，也很难阅读。</p>
+<p>在 Python 中，我们可以为函数的参数提供默认值。调用该函数时，具有默认值的参数是可选的。如果未提供它们，则默认值将绑定到正式参数名称。例如，如果应用程序通常计算一摩尔粒子的压力，则可以提供此值作为默认值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">pressure</span>(<span class="params">v, t, n=<span class="number">6.022e23</span></span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Compute the pressure in pascals of an ideal gas.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        v -- volume of gas, in cubic meters</span></span><br><span class="line"><span class="string">        t -- absolute temperature in degrees kelvin</span></span><br><span class="line"><span class="string">        n -- particles of gas (default: one mole)</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        k = <span class="number">1.38e-23</span>  <span class="comment"># Boltzmann&#x27;s constant</span></span><br><span class="line">        <span class="keyword">return</span> n * k * t / v</span><br></pre></td></tr></table></figure>
+<p>在此示例中，该 <code>=</code> 符号表示两种不同的东西，具体取决于使用它的上下文。在 <code>def</code> 语句标头中， <code>=</code> 不执行赋值，而是指示调用 <code>pressure</code> 函数时要使用的默认值。相反，函数主体 <code>k</code> 中的赋值语句将名称 <code>k</code>绑定到玻尔兹曼常数的近似值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pressure(<span class="number">1</span>, <span class="number">273.15</span>)</span><br><span class="line"><span class="number">2269.974834</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pressure(<span class="number">1</span>, <span class="number">273.15</span>, <span class="number">3</span> * <span class="number">6.022e23</span>)</span><br><span class="line"><span class="number">6809.924502</span></span><br></pre></td></tr></table></figure>
+<p>该 <code>pressure</code> 函数被定义为接受三个参数，但在上面的第一个调用表达式中只提供了两个参数。在本例中， <code>n</code> 的值取自 <code>def</code> 语句 default。如果提供了第三个参数，则忽略默认值。</p>
+<p>作为准则，函数正文中使用的大多数数据值都应表示为命名参数的默认值，以便易于检查并可由函数调用方更改。一些永不改变的值，例如基本常量 <code>k</code> ，可以绑定在函数体或全局框架中。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
