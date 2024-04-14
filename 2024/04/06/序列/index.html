@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mxkgf.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="序列序列是值的有序集合。该序列是计算机科学中强大的基本抽象。序列不是特定内置类型或抽象数据表示的实例，而是在几种不同类型的数据之间共享的行为的集合。也就是说，序列有很多种，但它们都有共同的行为。尤其， 长度。序列的长度是有限的。空序列的长度为 0。 元素选择。序列的元素对应于任何小于其长度的非负整数索引，第一个元素从 0 开始。 Python 包含几种本机数据类型，即序列，其中最重要的是 list">
+<meta property="og:type" content="article">
+<meta property="og:title" content="序列">
+<meta property="og:url" content="http://mxkgf.github.io/2024/04/06/%E5%BA%8F%E5%88%97/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="序列序列是值的有序集合。该序列是计算机科学中强大的基本抽象。序列不是特定内置类型或抽象数据表示的实例，而是在几种不同类型的数据之间共享的行为的集合。也就是说，序列有很多种，但它们都有共同的行为。尤其， 长度。序列的长度是有限的。空序列的长度为 0。 元素选择。序列的元素对应于任何小于其长度的非负整数索引，第一个元素从 0 开始。 Python 包含几种本机数据类型，即序列，其中最重要的是 list">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-06T12:49:00.000Z">
+<meta property="article:modified_time" content="2024-04-09T04:34:27.826Z">
+<meta property="article:author" content="马晓康">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="cs61a">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://mxkgf.github.io/2024/04/06/%E5%BA%8F%E5%88%97/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh_CN","comments":true,"permalink":"http://mxkgf.github.io/2024/04/06/%E5%BA%8F%E5%88%97/","path":"2024/04/06/序列/","title":"序列"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>序列 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-日程表"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-站点地图"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-公益404"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%8F%E5%88%97"><span class="nav-number">1.</span> <span class="nav-text">序列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E8%BF%AD%E4%BB%A3"><span class="nav-number">1.2.</span> <span class="nav-text">序列迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%A4%84%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">序列处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E6%8A%BD%E8%B1%A1"><span class="nav-number">1.4.</span> <span class="nav-text">序列抽象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.5.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91"><span class="nav-number">1.6.</span> <span class="nav-text">树</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">马晓康</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mxkgf" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mxkgf" rel="noopener me" target="_blank">GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh_CN">
+    <link itemprop="mainEntityOfPage" href="http://mxkgf.github.io/2024/04/06/%E5%BA%8F%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="马晓康">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="天行健，君子以自强不息">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="序列 | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          序列
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-04-06 20:49:00" itemprop="dateCreated datePublished" datetime="2024-04-06T20:49:00+08:00">2024-04-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-04-09 12:34:27" itemprop="dateModified" datetime="2024-04-09T12:34:27+08:00">2024-04-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h2><p>序列是值的有序集合。该序列是计算机科学中强大的基本抽象。序列不是特定内置类型或抽象数据表示的实例，而是在几种不同类型的数据之间共享的行为的集合。也就是说，序列有很多种，但它们都有共同的行为。尤其，</p>
+<p><strong>长度</strong>。序列的长度是有限的。空序列的长度为 0。</p>
+<p><strong>元素选择</strong>。序列的元素对应于任何小于其长度的非负整数索引，第一个元素从 0 开始。</p>
+<p>Python 包含几种本机数据类型，即序列，其中最重要的是 <code>list</code> 。</p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p><code>list</code> 值是一个可以具有任意长度的序列。列表具有大量内置行为，以及表达这些行为的特定语法。我们已经看到了列表文字，其计算结果为 <code>list</code> 实例，以及计算结果为列表中的值的元素选择表达式。内置的 <code>len</code> 函数返回序列的长度。下面， <code>digits</code> 是一个包含四个元素的列表。索引 3 处的元素是 8。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>digits = [<span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">8</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">len</span>(digits)</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>digits[<span class="number">3</span>]</span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>此外，列表可以相加并乘以整数。对于序列，加法和乘法不会将元素相加或相乘，而是组合并复制序列本身。也就是说， <code>operator</code> 模块中的 <code>add</code> 函数（以及 <code>+</code> 运算符）生成一个列表，该列表是所添加参数的串联。 <code>operator</code> 中的 <code>mul</code> 函数（以及 <code>*</code> 运算符）可以采用一个列表和一个整数 <code>k</code> 来返回包含以下内容的列表： <code>k</code> 原始列表的重复。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">2</span>, <span class="number">7</span>] + digits * <span class="number">2</span></span><br><span class="line">[<span class="number">2</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">8</span>]</span><br></pre></td></tr></table></figure>
+<p>任何值都可以包含在列表中，包括另一个列表。可以多次应用元素选择，以便在包含列表的列表中选择深度嵌套的元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pairs = [[<span class="number">10</span>, <span class="number">20</span>], [<span class="number">30</span>, <span class="number">40</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pairs[<span class="number">1</span>]</span><br><span class="line">[<span class="number">30</span>, <span class="number">40</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pairs[<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line"><span class="number">30</span></span><br></pre></td></tr></table></figure>
+<h3 id="序列迭代"><a href="#序列迭代" class="headerlink" title="序列迭代"></a>序列迭代</h3><p>在许多情况下，我们希望迭代一个序列的元素，并对每个元素进行一些计算。这种模式非常常见，Python 提供了一种额外的控制语句来处理顺序数据：for 循环语句。</p>
+<p>考虑一个问题，即计算一个值在序列中出现的次数。我们可以使用一个 for 循环来实现一个函数来计算这个次数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">count</span>(<span class="params">s, value</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Count the number of occurrences of value in sequence s.&quot;&quot;&quot;</span></span><br><span class="line">        total, index = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> index &lt; <span class="built_in">len</span>(s):</span><br><span class="line">            <span class="keyword">if</span> s[index] == value:</span><br><span class="line">                total = total + <span class="number">1</span></span><br><span class="line">            index = index + <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> total</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>count(digits, <span class="number">8</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>Python 的 for 循环语句可以简化这个函数体，直接迭代元素值，而不需要引入任何名称。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">count</span>(<span class="params">s, value</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Count the number of occurrences of value in sequence s.&quot;&quot;&quot;</span></span><br><span class="line">        total = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> elem <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> elem == value:</span><br><span class="line">                total = total + <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> total</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>count(digits, <span class="number">8</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>一个 <code>for</code> 语句由一个形式为的单个从句组成。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &lt;name&gt; <span class="keyword">in</span> &lt;expression&gt;:</span><br><span class="line">    &lt;suite&gt;</span><br></pre></td></tr></table></figure>
+<p>通过以下步骤执行一个 <code>for</code> 语句：</p>
+<ol>
+<li>评估头部 <code>&lt;expression&gt;</code> ，它必须产生一个可迭代的值。</li>
+<li>对于该可迭代值中的每个元素值，按顺序执行以下操作：<ol>
+<li>将 <code>&lt;name&gt;</code> 绑定到当前帧中的该值。</li>
+<li>Execute the <code>&lt;suite&gt;</code>. 执行 <code>&lt;suite&gt;</code> 。</li>
+</ol>
+</li>
+</ol>
+<p>这个评估过程的一个重要结果是，在执行 <code>&lt;name&gt;</code> 语句后， <code>&lt;name&gt;</code> 将绑定到序列的最后一个元素。循环 <code>for</code> 引入了另一种通过语句更新环境的方式。</p>
+<p><strong>序列解包</strong>。程序中常见的一种模式是有一个元素序列，这些元素本身也是序列，但长度固定。一个 <code>for</code>语句可以在其头部包含多个名称，以将每个元素序列“解包”为其各自的元素。例如，我们可能有一个包含两个元素列表的列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pairs = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">2</span>, <span class="number">2</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+<p>并希望找出其中具有相同第一个和第二个元素的这些对的数量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>same_count = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>以下具有两个名称的 <code>for</code> 语句将分别将每个名称 <code>x</code> 和 <code>y</code> 绑定到每对中的第一个和第二个元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x, y <span class="keyword">in</span> pairs:</span><br><span class="line">        <span class="keyword">if</span> x == y:</span><br><span class="line">            same_count = same_count + <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>same_count</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>将多个名称绑定到多个值的固定长度序列的模式称为序列解包；这与将多个名称绑定到多个值的赋值语句中看到的模式相同。</p>
+<p><strong>范围</strong>。在Python中， <code>range</code> 是另一种内置的序列类型，表示一系列整数的范围。范围是使用 <code>range</code> 创建的，它接受两个整数参数：所需范围中的第一个数字和最后一个数字之后的一个数字。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>)  <span class="comment"># Includes 1, but not 10</span></span><br><span class="line"><span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<p>调用 <code>list</code> 构造函数的范围将评估为具有与范围相同元素的列表，以便可以轻松检查元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">5</span>, <span class="number">8</span>))</span><br><span class="line">[<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]</span><br></pre></td></tr></table></figure>
+<p>如果只提供一个参数，则将其解释为从0开始的范围的最后一个值之后的一个值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">4</span>))</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>范围通常出现在 <code>for</code> 头部的表达式中，用于指定套件应该执行的次数：如果在套件中未使用该名称，常见的约定是在 <code>for</code> 头部中使用一个下划线字符作为名称：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Go Bears!&#x27;</span>)</span><br><span class="line"></span><br><span class="line">Go Bears!</span><br><span class="line">Go Bears!</span><br><span class="line">Go Bears!</span><br></pre></td></tr></table></figure>
+<p>这个下划线在解释器看来只是环境中的另一个名称，但在程序员中有一个传统的含义，表示该名称不会出现在任何未来的表达式中。</p>
+<h3 id="序列处理"><a href="#序列处理" class="headerlink" title="序列处理"></a>序列处理</h3><p>序列是一种常见的复合数据形式，整个程序通常围绕这个单一的抽象进行组织。具有序列作为输入和输出的模块化组件可以混合和匹配以执行数据处理。通过将一系列简单而专注的序列处理操作链接在一起，可以定义复杂的组件。</p>
+<p><strong>列表推导式</strong>。许多序列处理操作可以通过对序列中的每个元素求值并将结果值收集到一个结果序列中来表达。在Python中，列表推导式是执行这种计算的表达式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>odds = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[x+<span class="number">1</span> <span class="keyword">for</span> x <span class="keyword">in</span> odds]</span><br><span class="line">[<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>]</span><br></pre></td></tr></table></figure>
+<p>上面的 <code>for</code> 关键字不是 <code>for</code> 语句的一部分，而是列表推导式的一部分，因为它包含在方括号中。子表达式 <code>x+1</code> 会根据 <code>odds</code> 中的每个元素依次绑定到 <code>x</code> ，并将结果值收集到一个列表中。</p>
+<p>另一个常见的序列处理操作是选择满足某些条件的值的子集。列表推导也可以表达这种模式，例如选择所有能够整除 <code>25</code> 的 <code>odds</code> 元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[x <span class="keyword">for</span> x <span class="keyword">in</span> odds <span class="keyword">if</span> <span class="number">25</span> % x == <span class="number">0</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<p>列表推导式的一般形式是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&lt;<span class="built_in">map</span> expression&gt; <span class="keyword">for</span> &lt;name&gt; <span class="keyword">in</span> &lt;sequence expression&gt; <span class="keyword">if</span> &lt;<span class="built_in">filter</span> expression&gt;]</span><br></pre></td></tr></table></figure>
+<p>为了评估列表推导式，Python评估 <code>&lt;sequence expression&gt;</code> ，它必须返回一个可迭代的值。然后，按顺序对每个元素进行绑定，将元素值绑定到 <code>&lt;name&gt;</code> ，评估过滤表达式，如果它返回一个真值，就评估映射表达式。映射表达式的值被收集到一个列表中。</p>
+<p>聚合。在序列处理中，第三种常见模式是将序列中的所有值聚合为一个单一的值。内置函数 <code>sum</code> 、 <code>min</code>和 <code>max</code> 都是聚合函数的示例。</p>
+<p>通过将对每个元素进行表达式评估的模式、选择元素的子集和聚合元素的模式结合起来，我们可以使用序列处理方法来解决问题。</p>
+<p>完美数是一个正整数，它等于它的约数之和。约数是小于 <code>n</code> 的正整数，可以整除 <code>n</code> 。列举 <code>n</code> 的约数可以用列表推导式表示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">divisors</span>(<span class="params">n</span>):</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span>] + [x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n) <span class="keyword">if</span> n % x == <span class="number">0</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>divisors(<span class="number">4</span>)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>divisors(<span class="number">12</span>)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+<p>使用 <code>divisors</code> ，我们可以用另一个列表推导式计算出从 1 到 1000 的所有完美数。（通常认为 1 也是一个完美数，但它不符合我们对 <code>divisors</code> 的定义。）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[n <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">1000</span>) <span class="keyword">if</span> <span class="built_in">sum</span>(divisors(n)) == n]</span><br><span class="line">[<span class="number">6</span>, <span class="number">28</span>, <span class="number">496</span>]</span><br></pre></td></tr></table></figure>
+<p>我们可以重复使用我们对 <code>divisors</code> 的定义来解决另一个问题，即找到一个具有整数边长的矩形的最小周长，已知其面积。矩形的面积等于其高度乘以宽度。因此，已知面积和高度，我们可以计算出宽度。我们可以断言宽度和高度都能够整除面积，以确保边长为整数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">width</span>(<span class="params">area, height</span>):</span><br><span class="line">        <span class="keyword">assert</span> area % height == <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> area // height</span><br></pre></td></tr></table></figure>
+<p>矩形的周长是其边长之和。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">perimeter</span>(<span class="params">width, height</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span> * width + <span class="number">2</span> * height</span><br></pre></td></tr></table></figure>
+<p>一个长方形的高度必须是其面积的一个因数。我们可以通过考虑所有可能的高度来计算最小的周长。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">minimum_perimeter</span>(<span class="params">area</span>):</span><br><span class="line">        heights = divisors(area)</span><br><span class="line">        perimeters = [perimeter(width(area, h), h) <span class="keyword">for</span> h <span class="keyword">in</span> heights]</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(perimeters)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>area = <span class="number">80</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>width(area, <span class="number">5</span>)</span><br><span class="line"><span class="number">16</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>perimeter(<span class="number">16</span>, <span class="number">5</span>)</span><br><span class="line"><span class="number">42</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>perimeter(<span class="number">10</span>, <span class="number">8</span>)</span><br><span class="line"><span class="number">36</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>minimum_perimeter(area)</span><br><span class="line"><span class="number">36</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[minimum_perimeter(n) <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>)]</span><br><span class="line">[<span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">10</span>, <span class="number">16</span>, <span class="number">12</span>, <span class="number">12</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>高阶函数</strong>。我们在序列处理中观察到的常见模式可以使用高阶函数来表达。首先，对序列中的每个元素求值可以通过将函数应用于每个元素来表达。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">apply_to_all</span>(<span class="params">map_fn, s</span>):</span><br><span class="line">        <span class="keyword">return</span> [map_fn(x) <span class="keyword">for</span> x <span class="keyword">in</span> s]</span><br></pre></td></tr></table></figure>
+<p>仅选择满足某个表达式为真的元素可以通过对每个元素应用函数来表示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">keep_if</span>(<span class="params">filter_fn, s</span>):</span><br><span class="line">        <span class="keyword">return</span> [x <span class="keyword">for</span> x <span class="keyword">in</span> s <span class="keyword">if</span> filter_fn(x)]</span><br></pre></td></tr></table></figure>
+<p>最后，许多形式的聚合可以通过反复将一个二元函数应用于迄今为止的值和每个元素来表示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">reduce</span>(<span class="params">reduce_fn, s, initial</span>):</span><br><span class="line">        reduced = initial</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> s:</span><br><span class="line">            reduced = reduce_fn(reduced, x)</span><br><span class="line">        <span class="keyword">return</span> reduced</span><br></pre></td></tr></table></figure>
+<p> 我们也可以使用这些高阶函数来找到完美数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">divisors_of</span>(<span class="params">n</span>):</span><br><span class="line">        divides_n = <span class="keyword">lambda</span> x: n % x == <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span>] + keep_if(divides_n, <span class="built_in">range</span>(<span class="number">2</span>, n))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>divisors_of(<span class="number">12</span>)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> operator <span class="keyword">import</span> add</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">sum_of_divisors</span>(<span class="params">n</span>):</span><br><span class="line">        <span class="keyword">return</span> reduce(add, divisors_of(n), <span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">perfect</span>(<span class="params">n</span>):</span><br><span class="line">        <span class="keyword">return</span> sum_of_divisors(n) == n</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>keep_if(perfect, <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">1000</span>))</span><br><span class="line">[<span class="number">1</span>, <span class="number">6</span>, <span class="number">28</span>, <span class="number">496</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>常规名称</strong>。在计算机科学界， <code>apply_to_all</code> 的更常见名称是 <code>map</code> ， <code>keep_if</code> 的更常见名称是 <code>filter</code> 。在Python中，内置的 <code>map</code> 和 <code>filter</code> 是这些函数的泛化版本，它们不返回列表。</p>
+<p>上述定义等同于将内置的 <code>map</code> 和 <code>filter</code> 调用的结果应用于 <code>list</code> 构造函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>apply_to_all = <span class="keyword">lambda</span> map_fn, s: <span class="built_in">list</span>(<span class="built_in">map</span>(map_fn, s))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>keep_if = <span class="keyword">lambda</span> filter_fn, s: <span class="built_in">list</span>(<span class="built_in">filter</span>(filter_fn, s))</span><br></pre></td></tr></table></figure>
+<p><code>reduce</code> 函数是Python标准库中 <code>functools</code> 模块内置的。在这个版本中， <code>initial</code> 参数是可选的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> operator <span class="keyword">import</span> mul</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">product</span>(<span class="params">s</span>):</span><br><span class="line">        <span class="keyword">return</span> reduce(mul, s)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>product([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"><span class="number">120</span></span><br></pre></td></tr></table></figure>
+<p>在Python程序中，直接使用列表推导式而不是高阶函数更为常见，但两种方法都广泛用于序列处理。</p>
+<h3 id="序列抽象"><a href="#序列抽象" class="headerlink" title="序列抽象"></a>序列抽象</h3><p>我们已经介绍了两种满足序列抽象的本地数据类型：列表和范围。它们都满足我们在本节开始时提出的条件：长度和元素选择。Python 还包括了两种扩展序列抽象的序列类型的行为。</p>
+<p><strong>成员资格</strong>。可以测试一个值是否属于一个序列。Python有两个运算符 <code>in</code> 和 <code>not in</code> ，根据元素是否出现在序列中，它们的结果为 <code>True</code> 或 <code>False</code> 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>digits</span><br><span class="line">[<span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">8</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span> <span class="keyword">in</span> digits</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1828</span> <span class="keyword">not</span> <span class="keyword">in</span> digits</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p><strong>切片</strong>。序列中包含较小的序列。序列的切片是原始序列的任何连续范围，由一对整数指定。与 <code>range</code>构造函数一样，第一个整数表示切片的起始索引，第二个整数表示结束索引之后的位置。</p>
+<p>列举Python序列抽象的这些附加行为给了我们一个机会来思考什么构成了一个通用的有用数据抽象。抽象的丰富性（即包含多少行为）会产生后果。对于抽象的用户来说，附加行为可能是有帮助的。另一方面，用一个新的数据类型满足丰富抽象的要求可能是具有挑战性的。丰富抽象的另一个负面后果是用户需要更长时间来学习。</p>
+<p>序列在计算中非常普遍，因此具有丰富的抽象。学习一些复杂的行为是合理的。一般来说，大多数用户定义的抽象应尽可能简单。</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>文本值对于计算机科学来说可能比数字更基础。以 Python 程序为例，它们是以文本形式编写和存储的。Python 中用于表示文本的本地数据类型称为字符串，对应于构造函数 <code>str</code> 。</p>
+<p>在Python中，字符串的表示、表达和操作有许多细节。字符串是丰富抽象的另一个例子，对程序员来说，掌握它需要相当大的投入。</p>
+<p>字符串字面值可以表示任意文本，可以用单引号或双引号括起来。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;I am string!&#x27;</span></span><br><span class="line"><span class="string">&#x27;I am string!&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;I&#x27;ve got an apostrophe&quot;</span></span><br><span class="line"><span class="string">&quot;I&#x27;ve got an apostrophe&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;您好&#x27;</span></span><br><span class="line"><span class="string">&#x27;您好&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>我们已经在我们的代码中看到了字符串，作为文档字符串，在对 <code>print</code> 的调用中，以及作为 <code>assert</code> 语句中的错误消息。</p>
+<p>字符串满足我们在本节开始时介绍的序列的两个基本条件：它们具有长度并支持元素选择。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>city = <span class="string">&#x27;Berkeley&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">len</span>(city)</span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>city[<span class="number">3</span>]</span><br><span class="line"><span class="string">&#x27;k&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>字符串的元素本身就是只有一个字符的字符串。字符可以是字母、标点符号或其他符号。与许多其他编程语言不同，Python没有单独的字符类型；任何文本都是字符串，表示单个字符的字符串长度为1。</p>
+<p>像列表一样，字符串也可以通过加法和乘法进行组合。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;Berkeley&#x27;</span> + <span class="string">&#x27;, CA&#x27;</span></span><br><span class="line"><span class="string">&#x27;Berkeley, CA&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;Shabu &#x27;</span> * <span class="number">2</span></span><br><span class="line"><span class="string">&#x27;Shabu Shabu &#x27;</span></span><br></pre></td></tr></table></figure>
+<p>成员资格。字符串的行为与Python中的其他序列类型不同。字符串抽象不符合我们为列表和范围描述的完整序列抽象。特别是，成员运算符 <code>in</code> 适用于字符串，但其行为与应用于序列时完全不同。它匹配子字符串而不是元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;here&#x27;</span> <span class="keyword">in</span> <span class="string">&quot;Where&#x27;s Waldo?&quot;</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>多行文字。字符串不限于单行。三个引号用于界定跨越多行的字符串文字。我们已经广泛地使用了这种三重引号来编写文档字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&quot;&quot;The Zen of Python</span></span><br><span class="line"><span class="string">claims, Readability counts.</span></span><br><span class="line"><span class="string">Read more: import this.&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">&#x27;The Zen of Python\nclaims, &quot;Readability counts.&quot;\nRead more: import this.&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>在上面的打印结果中， <code>\n</code> （发音为“反斜杠 en”）是一个表示换行的单个元素。尽管它看起来是两个字符（反斜杠和“n”），但在长度和元素选择方面，它被视为一个单一字符。</p>
+<p><strong>字符串强制转换</strong>。在Python中，可以通过调用构造函数并将对象值作为参数来从任何对象创建字符串。字符串的这个特性对于从不同类型的对象构建描述性字符串非常有用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">str</span>(<span class="number">2</span>) + <span class="string">&#x27; is an element of &#x27;</span> + <span class="built_in">str</span>(digits)</span><br><span class="line"><span class="string">&#x27;2 is an element of [1, 8, 2, 8]&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><p>我们能够将列表用作其他列表的元素，为我们的编程语言提供了一种新的组合方式。这种能力被称为数据类型的闭包属性。一般来说，如果组合的结果可以使用相同的方法再次组合，那么组合数据值的方法具有闭包属性。闭包是任何组合方式的关键，因为它允许我们创建层次结构 - 由部分组成的结构，这些部分本身又由部分组成，依此类推。</p>
+<p>在列表中嵌套列表可能会引入复杂性。树是一种基本的数据抽象，它对层次结构的值的结构和操作施加了规律性。</p>
+<p>一棵树有一个根标签和一系列的分支。每个树的分支都是一棵树。没有分支的树被称为叶子。任何包含在树中的树都被称为该树的子树（例如分支的分支）。树的每个子树的根被称为该树中的节点。</p>
+<p>树的数据抽象包括构造函数 <code>tree</code> 和选择器 <code>label</code> 和 <code>branches</code> 。我们从一个简化版本开始。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">tree</span>(<span class="params">root_label, branches=[]</span>):</span><br><span class="line">        <span class="keyword">for</span> branch <span class="keyword">in</span> branches:</span><br><span class="line">            <span class="keyword">assert</span> is_tree(branch), <span class="string">&#x27;branches must be trees&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> [root_label] + <span class="built_in">list</span>(branches)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">label</span>(<span class="params">tree</span>):</span><br><span class="line">        <span class="keyword">return</span> tree[<span class="number">0</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">branches</span>(<span class="params">tree</span>):</span><br><span class="line">        <span class="keyword">return</span> tree[<span class="number">1</span>:]</span><br></pre></td></tr></table></figure>
+<p>一棵树只有在具有根标签且所有分支也是树的情况下才是良好形态的。在 <code>tree</code> 构造函数中应用 <code>is_tree</code> 函数来验证所有分支是否良好形态。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">is_tree</span>(<span class="params">tree</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(tree) != <span class="built_in">list</span> <span class="keyword">or</span> <span class="built_in">len</span>(tree) &lt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">for</span> branch <span class="keyword">in</span> branches(tree):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> is_tree(branch):</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p><code>is_leaf</code> 函数检查一棵树是否有分支。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">is_leaf</span>(<span class="params">tree</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">not</span> branches(tree)</span><br></pre></td></tr></table></figure>
+<p>树可以通过嵌套表达式构建。以下树 <code>t</code> 具有根标签3和两个分支。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>t = tree(<span class="number">3</span>, [tree(<span class="number">1</span>), tree(<span class="number">2</span>, [tree(<span class="number">1</span>), tree(<span class="number">1</span>)])])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t</span><br><span class="line">[<span class="number">3</span>, [<span class="number">1</span>], [<span class="number">2</span>, [<span class="number">1</span>], [<span class="number">1</span>]]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>label(t)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>branches(t)</span><br><span class="line">[[<span class="number">1</span>], [<span class="number">2</span>, [<span class="number">1</span>], [<span class="number">1</span>]]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>label(branches(t)[<span class="number">1</span>])</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>is_leaf(t)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>is_leaf(branches(t)[<span class="number">0</span>])</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/cs61a/" rel="tag"># cs61a</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/06/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/" rel="prev" title="高阶函数">
+                  <i class="fa fa-angle-left"></i> 高阶函数
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/04/08/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" rel="next" title="面向对象编程">
+                  面向对象编程 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">马晓康</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"mhchem":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
