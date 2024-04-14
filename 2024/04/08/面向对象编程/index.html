@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mxkgf.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="面向对象编程面向对象编程（OOP）是一种组织程序的方法，它将本章介绍的许多思想集合在一起。类似于数据抽象中的函数，类创建了在使用和实现数据之间的抽象屏障。类似于分派字典，对象响应行为请求。类似于可变数据结构，对象具有不直接从全局环境访问的局部状态。Python 对象系统提供了方便的语法，以促进使用这些技术来组织程序。这些语法在其他面向对象编程语言中也是共享的。 对象系统提供的不仅仅是方便。它为在计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象编程">
+<meta property="og:url" content="http://mxkgf.github.io/2024/04/08/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="面向对象编程面向对象编程（OOP）是一种组织程序的方法，它将本章介绍的许多思想集合在一起。类似于数据抽象中的函数，类创建了在使用和实现数据之间的抽象屏障。类似于分派字典，对象响应行为请求。类似于可变数据结构，对象具有不直接从全局环境访问的局部状态。Python 对象系统提供了方便的语法，以促进使用这些技术来组织程序。这些语法在其他面向对象编程语言中也是共享的。 对象系统提供的不仅仅是方便。它为在计">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.composingprograms.com/img/multiple_inheritance.png">
+<meta property="article:published_time" content="2024-04-07T22:49:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T10:08:26.868Z">
+<meta property="article:author" content="马晓康">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="cs61a">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.composingprograms.com/img/multiple_inheritance.png">
+
+
+<link rel="canonical" href="http://mxkgf.github.io/2024/04/08/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh_CN","comments":true,"permalink":"http://mxkgf.github.io/2024/04/08/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/","path":"2024/04/08/面向对象编程/","title":"面向对象编程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>面向对象编程 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-日程表"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-站点地图"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-公益404"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">面向对象编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">对象和类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">定义类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E5%92%8C%E7%82%B9%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">消息传递和点表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">类属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">1.5.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BB%A7%E6%89%BF"><span class="nav-number">1.6.</span> <span class="nav-text">使用继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF"><span class="nav-number">1.7.</span> <span class="nav-text">多重继承</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">马晓康</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mxkgf" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mxkgf" rel="noopener me" target="_blank">GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh_CN">
+    <link itemprop="mainEntityOfPage" href="http://mxkgf.github.io/2024/04/08/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="马晓康">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="天行健，君子以自强不息">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="面向对象编程 | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面向对象编程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-04-08 06:49:00" itemprop="dateCreated datePublished" datetime="2024-04-08T06:49:00+08:00">2024-04-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-04-10 18:08:26" itemprop="dateModified" datetime="2024-04-10T18:08:26+08:00">2024-04-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h2><p>面向对象编程（OOP）是一种组织程序的方法，它将本章介绍的许多思想集合在一起。类似于数据抽象中的函数，类创建了在使用和实现数据之间的抽象屏障。类似于分派字典，对象响应行为请求。类似于可变数据结构，对象具有不直接从全局环境访问的局部状态。Python 对象系统提供了方便的语法，以促进使用这些技术来组织程序。这些语法在其他面向对象编程语言中也是共享的。</p>
+<p>对象系统提供的不仅仅是方便。它为在计算机内部设计程序提供了一种新的隐喻，其中有几个独立的代理在相互作用。每个对象将本地状态和行为捆绑在一起，以一种抽象了两者复杂性的方式。对象彼此通信，并且有用的结果是作为它们相互作用的结果计算出来的。对象不仅传递消息，还与同一类型的其他对象共享行为，并从相关类型继承特性。</p>
+<p>面向对象编程范式具有支持对象隐喻的专有词汇。我们已经看到，对象是具有方法和属性的数据值，可以通过点符号访问。每个对象还有一个称为类的类型。为了创建新类型的数据，我们实现新的类。</p>
+<h3 id="对象和类"><a href="#对象和类" class="headerlink" title="对象和类"></a>对象和类</h3><p>类作为所有类型为该类的对象的模板。每个对象都是某个特定类的实例。到目前为止，我们使用的对象都有内置的类，但也可以创建新的用户定义类。类定义指定了该类的对象之间共享的属性和方法。我们将通过重新访问银行账户的示例来介绍类语句。</p>
+<p>当引入本地状态时，我们发现银行账户自然地被建模为具有 <code>balance</code> 的可变值。银行账户对象应该有一个 <code>withdraw</code> 方法，用于更新账户余额并返回请求的金额（如果可用）。为了完成抽象：银行账户应该能够返回其当前的 <code>balance</code> ，返回账户 <code>holder</code> 的名称，并返回 <code>deposit</code> 的金额。</p>
+<p>一个 <code>Account</code> 类允许我们创建多个银行账户实例。创建一个新的对象实例的行为被称为实例化类。在 Python 中，实例化类的语法与调用函数的语法相同。在这种情况下，我们使用参数 <code>&#39;Kirk&#39;</code> 调用 <code>Account</code> ，即账户持有人的姓名。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = Account(<span class="string">&#x27;Kirk&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>对象的属性是与对象关联的名称-值对，可以通过点表示法访问。与类的所有对象相对应的特定对象的属性称为实例属性。每个 <code>Account</code> 都有自己的余额和账户持有人姓名，这些是实例属性的示例。在更广泛的编程社区中，实例属性也可以称为字段、属性或实例变量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.holder</span><br><span class="line"><span class="string">&#x27;Kirk&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.balance</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>对对象进行操作或执行特定于对象的计算的函数称为方法。方法的返回值和副作用可能依赖于并改变对象的其他属性。例如， <code>deposit</code> 是我们的 <code>Account</code> 对象 <code>a</code> 的一个方法。它接受一个参数，即要存入的金额，改变对象的 <code>balance</code> 属性，并返回结果余额。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.deposit(<span class="number">15</span>)</span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
+<p>我们说方法是在特定对象上调用的。通过调用 <code>withdraw</code> 方法，要么批准提款并扣除金额，要么拒绝请求并返回错误消息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.withdraw(<span class="number">10</span>)  <span class="comment"># The withdraw method returns the balance after withdrawal</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.balance       <span class="comment"># The balance attribute has changed</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.withdraw(<span class="number">10</span>)</span><br><span class="line"><span class="string">&#x27;Insufficient funds&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>如上所示，方法的行为可以取决于对象的可变属性。对于相同的参数，两次调用 <code>withdraw</code> 会返回不同的结果。</p>
+<h3 id="定义类"><a href="#定义类" class="headerlink" title="定义类"></a>定义类</h3><p>用户定义的类是通过 <code>class</code> 语句创建的，该语句由一个单独的子句组成。类语句定义了类名，然后包含一系列语句来定义类的属性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> &lt;name&gt;:</span><br><span class="line">    &lt;suite&gt;</span><br></pre></td></tr></table></figure>
+<p>当执行一个类语句时，会创建一个新的类并绑定到当前环境的第一个帧中的 <code>&lt;name&gt;</code> 。然后执行套件。通过 <code>def</code> 或赋值语句在 <code>class</code> 语句的 <code>&lt;suite&gt;</code> 中绑定的任何名称都会创建或修改类的属性。</p>
+<p>类通常围绕着操作实例属性进行组织，实例属性是与该类的每个实例关联的名称-值对。通过定义一个初始化新对象的方法，类指定了其对象的实例属性。例如，初始化 <code>Account</code> 类的对象的一部分是将其起始余额设为0。</p>
+<p>一个 <code>&lt;suite&gt;</code> 语句的 <code>class</code> 包含 <code>def</code> 语句，用于为该类的对象定义新的方法。在Python中，初始化对象的方法有一个特殊的名称 <code>__init__</code> （单词”init”两边各有两个下划线），被称为该类的构造函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">class</span> <span class="title class_">Account</span>:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, account_holder</span>):</span><br><span class="line">            self.balance = <span class="number">0</span></span><br><span class="line">            self.holder = account_holder</span><br></pre></td></tr></table></figure>
+<p><code>__init__</code> 方法对 <code>Account</code> 有两个形式参数。第一个参数 <code>self</code> 绑定到新创建的 <code>Account</code> 对象。第二个参数 <code>account_holder</code> 绑定到在实例化类时传递的参数。</p>
+<p>构造函数将实例属性名称 <code>balance</code> 绑定到 0。它还将属性名称 <code>holder</code> 绑定到名称 <code>account_holder</code> 的值。形式参数 <code>account_holder</code> 是 <code>__init__</code> 方法中的局部名称。另一方面，通过最终赋值语句绑定的名称 <code>holder</code> 会持续存在，因为它以点表示法存储为 <code>self</code> 的属性。</p>
+<p>构造函数将实例属性名称 <code>balance</code> 绑定到 0。它还将属性名称 <code>holder</code> 绑定到名称 <code>account_holder</code> 的值。形式参数 <code>account_holder</code> 是 <code>__init__</code> 方法中的局部名称。另一方面，通过最终赋值语句绑定的名称 <code>holder</code> 会持续存在，因为它以点表示法存储为 <code>self</code> 的属性。</p>
+<p>对 <code>Account</code> 类的这个“调用”创建了一个新对象，该对象是 <code>Account</code> 的一个实例，然后使用两个参数调用构造函数 <code>__init__</code> ：新创建的对象和字符串 <code>&#39;Kirk&#39;</code> 。按照惯例，我们在构造函数的第一个参数使用参数名称 <code>self</code> ，因为它绑定到正在实例化的对象。这个惯例在几乎所有的 Python 代码中都被采用。<br>现在，我们可以使用点表示法访问对象的 <code>balance</code> 和 <code>holder</code> 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.balance</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.holder</span><br><span class="line"><span class="string">&#x27;Kirk&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>身份。每个新的账户实例都有自己的余额属性，其值与同一类的其他对象无关。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = Account(<span class="string">&#x27;Spock&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.balance = <span class="number">200</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[acc.balance <span class="keyword">for</span> acc <span class="keyword">in</span> (a, b)]</span><br><span class="line">[<span class="number">0</span>, <span class="number">200</span>]</span><br></pre></td></tr></table></figure>
+<p>为了强制实现这种分离，每个属于用户定义类的对象都有唯一的身份。对象的身份是通过使用 <code>is</code> 和 <code>is not</code> 运算符进行比较的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> a</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> <span class="keyword">not</span> b</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>尽管由相同的调用构建，绑定到 <code>a</code> 和 <code>b</code> 的对象并不相同。通常情况下，使用赋值将对象绑定到新名称并不会创建一个新对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c <span class="keyword">is</span> a</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>当使用调用表达式语法实例化类（例如 <code>Account</code> ）时，只有具有用户定义类的新对象才会被创建。</p>
+<p>方法。对象方法也是在 <code>class</code> 语句的代码块中通过 <code>def</code> 语句来定义的。下面， <code>deposit</code> 和 <code>withdraw</code> 都被定义为 <code>Account</code> 类的对象的方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">class</span> <span class="title class_">Account</span>:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, account_holder</span>):</span><br><span class="line">            self.balance = <span class="number">0</span></span><br><span class="line">            self.holder = account_holder</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">deposit</span>(<span class="params">self, amount</span>):</span><br><span class="line">            self.balance = self.balance + amount</span><br><span class="line">            <span class="keyword">return</span> self.balance</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">withdraw</span>(<span class="params">self, amount</span>):</span><br><span class="line">            <span class="keyword">if</span> amount &gt; self.balance:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&#x27;Insufficient funds&#x27;</span></span><br><span class="line">            self.balance = self.balance - amount</span><br><span class="line">            <span class="keyword">return</span> self.balance</span><br></pre></td></tr></table></figure>
+<p>虽然方法定义在声明方式上与函数定义没有区别，但是当执行时，方法定义会产生不同的效果。在类内部，通过在语句中使用 <code>def</code> 语句创建的函数值会绑定到声明的名称上，但是作为属性在类内部局部绑定。可以使用点符号从类的实例中调用该值作为方法。</p>
+<p>每个方法定义都包括一个特殊的第一个参数 <code>self</code> ，它绑定到调用该方法的对象上。例如，假设 <code>deposit</code> 在特定的 <code>Account</code> 对象上调用，并传递一个单一的参数值：存款金额。对象本身绑定到 <code>self</code>，而参数绑定到 <code>amount</code> 。所有调用的方法都可以通过 <code>self</code> 参数访问对象，因此它们都可以访问和操作对象的状态。</p>
+<p>要调用这些方法，我们再次使用点表示法，如下所示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>spock_account = Account(<span class="string">&#x27;Spock&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>spock_account.deposit(<span class="number">100</span>)</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>spock_account.withdraw(<span class="number">90</span>)</span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>spock_account.withdraw(<span class="number">90</span>)</span><br><span class="line"><span class="string">&#x27;Insufficient funds&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>spock_account.holder</span><br><span class="line"><span class="string">&#x27;Spock&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>当通过点表示法调用一个方法时，对象本身（在这种情况下绑定到 <code>spock_account</code> ）扮演着双重角色。首先，它确定了名称 <code>withdraw</code> 的含义； <code>withdraw</code> 不是环境中的名称，而是 <code>Account</code> 类中的局部名称。其次，在调用 <code>withdraw</code> 方法时，它绑定到第一个参数 <code>self</code> 。</p>
+<h3 id="消息传递和点表达式"><a href="#消息传递和点表达式" class="headerlink" title="消息传递和点表达式"></a>消息传递和点表达式</h3><p>方法是在类中定义的，实例属性通常在构造函数中赋值，它们是面向对象编程的基本元素。这两个概念在数据值的消息传递实现中复制了调度字典的大部分行为。对象使用点表示法接收消息，但这些消息不是任意的字符串键，而是类内部的名称。对象还具有命名的本地状态值（实例属性），但可以使用点表示法访问和操作该状态，而无需在实现中使用语句。</p>
+<p>消息传递的核心理念是，数据值应该通过响应与其所代表的抽象类型相关的消息来表现出行为。点表示法是 Python 的一种语法特性，形式化了消息传递的隐喻。使用内置对象系统的语言的优势在于，消息传递可以与其他语言特性（如赋值语句）无缝交互。我们不需要不同的消息来“获取”或“设置”与局部属性名关联的值；语言语法允许我们直接使用消息名称。</p>
+<p><strong>点表达式</strong>。代码片段 <code>spock_account.deposit</code> 称为点表达式。点表达式由表达式、点和名称组成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;expression&gt; . &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p><code>&lt;expression&gt;</code> 可以是任何有效的 Python 表达式，但 <code>&lt;name&gt;</code> 必须是一个简单名称（而不是求值为名称的表达式）。点表达式求值为具有给定 <code>&lt;name&gt;</code> 的属性值，对于值为 <code>&lt;expression&gt;</code> 的对象。</p>
+<p>内置函数 <code>getattr</code> 也按名称返回对象的属性。它是点表示法的函数等价物。使用 <code>getattr</code> ，我们可以使用字符串查找属性，就像我们在分派字典中所做的一样。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">getattr</span>(spock_account, <span class="string">&#x27;balance&#x27;</span>)</span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>我们还可以使用 <code>hasattr</code> 来测试一个对象是否具有指定的属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">hasattr</span>(spock_account, <span class="string">&#x27;deposit&#x27;</span>)</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>对象的属性包括其所有实例属性，以及其类中定义的所有属性（包括方法）。方法是类的属性，需要特殊处理。</p>
+<p><strong>方法和函数</strong>。当在对象上调用方法时，该对象会隐式地作为方法的第一个参数传递。也就是说，点号左侧的对象的值会自动作为点号右侧表达式中命名的方法的第一个参数传递。因此，对象会绑定到参数 <code>self</code> 。</p>
+<p>为了实现自动的 <code>self</code> 绑定，Python 区分了函数（我们从文本开始就一直在创建）和绑定方法。绑定方法将函数和将要调用该方法的对象耦合在一起。绑定方法的值已经与其第一个参数关联，即调用该方法时的实例，该实例将在调用方法时命名为 <code>self</code> 。</p>
+<p>我们可以通过调用点表达式的返回值上的 <code>type</code> 来看到交互式解释器中的差异。作为类的属性，方法只是一个函数，但作为实例的属性，它是一个绑定方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(Account.deposit)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;function&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(spock_account.deposit)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;method&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>这两个结果只在于第一个是一个具有参数 <code>self</code> 和 <code>amount</code> 的标准二参数函数，第二个则是一个一参数方法，在调用方法时名称 <code>self</code> 将自动绑定到名为 <code>spock_account</code> 的对象，而参数 <code>amount</code> 将绑定到传递给方法的参数。这两个值，无论是函数值还是绑定的方法值，都与相同的 <code>deposit</code> 函数体相关。</p>
+<p>我们可以用两种方式调用 <code>deposit</code> ：作为函数和作为绑定方法。在前一种情况下，我们必须明确地为 <code>self</code> 参数提供一个参数。在后一种情况下， <code>self</code> 参数会自动绑定。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Account.deposit(spock_account, <span class="number">1001</span>)  <span class="comment"># The deposit function takes 2 arguments</span></span><br><span class="line"><span class="number">1011</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>spock_account.deposit(<span class="number">1000</span>)           <span class="comment"># The deposit method takes 1 argument</span></span><br><span class="line"><span class="number">2011</span></span><br></pre></td></tr></table></figure>
+<p>函数 <code>getattr</code> 的行为与点符号表示法完全相同：如果它的第一个参数是对象，但名称是在类中定义的方法，则 <code>getattr</code> 返回一个绑定的方法值。另一方面，如果第一个参数是一个类，则 <code>getattr</code> 直接返回属性值，这是一个普通函数。</p>
+<p><strong>命名约定</strong>。类名通常使用 CapWords 约定进行书写（也称为驼峰命名，因为名称中间的大写字母看起来像驼峰）。方法名遵循使用下划线分隔的小写单词命名函数的标准约定。</p>
+<p>在某些情况下，存在与对象的维护和一致性相关的实例变量和方法，我们不希望对象的用户看到或使用它们。它们不是类定义的抽象的一部分，而是实现的一部分。Python的约定规定，如果属性名称以下划线开头，应该只在类自身的方法中访问，而不是类的用户访问。</p>
+<h3 id="类属性"><a href="#类属性" class="headerlink" title="类属性"></a>类属性</h3><p>某些属性值在给定类的所有对象之间共享。这些属性与类本身相关联，而不是与类的任何个体实例相关联。例如，假设银行按固定利率支付账户余额的利息。该利率可能会变化，但它是所有账户共享的单一值。</p>
+<p>类属性是通过赋值语句在 <code>class</code> 语句的套件中创建的，在任何方法定义之外。在更广泛的开发者社区中，类属性也可能被称为类变量或静态变量。以下类语句创建了一个名为 <code>interest</code> 的 <code>Account</code> 类属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">class</span> <span class="title class_">Account</span>:</span><br><span class="line">        interest = <span class="number">0.02</span>            <span class="comment"># A class attribute</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, account_holder</span>):</span><br><span class="line">            self.balance = <span class="number">0</span></span><br><span class="line">            self.holder = account_holder</span><br><span class="line">        <span class="comment"># Additional methods would be defined here</span></span><br></pre></td></tr></table></figure>
+<p>这个属性仍然可以从类的任何实例中访问。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>spock_account = Account(<span class="string">&#x27;Spock&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>kirk_account = Account(<span class="string">&#x27;Kirk&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>spock_account.interest</span><br><span class="line"><span class="number">0.02</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>kirk_account.interest</span><br><span class="line"><span class="number">0.02</span></span><br></pre></td></tr></table></figure>
+<p>然而，对类属性的单个赋值语句会改变该属性在类的所有实例中的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Account.interest = <span class="number">0.04</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>spock_account.interest</span><br><span class="line"><span class="number">0.04</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>kirk_account.interest</span><br><span class="line"><span class="number">0.04</span></span><br></pre></td></tr></table></figure>
+<p><strong>属性名称</strong>。我们在对象系统中引入了足够的复杂性，以至于我们必须指定名称如何解析为特定的属性。毕竟，我们很容易拥有一个类属性和一个实例属性具有相同的名称。</p>
+<p>正如我们所见，点表达式由一个表达式、一个点和一个名称组成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;expression&gt; . &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p>要评估一个点表达式：</p>
+<ol>
+<li>评估点号左侧的 <code>&lt;expression&gt;</code> ，得到点号表达式的对象。</li>
+<li><code>&lt;name&gt;</code> 与该对象的实例属性进行匹配；如果存在具有该名称的属性，则返回其值。</li>
+<li>如果 <code>&lt;name&gt;</code> 在实例属性中不存在，则在类中查找 <code>&lt;name&gt;</code> ，这将得到一个类属性值。</li>
+<li>除非该值是一个函数，否则将返回该值，如果是函数，则返回一个绑定方法。</li>
+</ol>
+<p>在这个评估过程中，实例属性在类属性之前被找到，就像局部名称在环境中优先于全局名称一样。在类中定义的方法与点表达式的对象在这个评估过程的第四步中组合形成一个绑定方法。在类中查找名称的过程有一些额外的细微差别，一旦我们介绍类继承，这些差别将很快出现。</p>
+<p><strong>属性赋值</strong>。所有包含点表达式的赋值语句都会影响该点表达式对象的属性。如果对象是一个实例，则赋值会设置实例属性。如果对象是一个类，则赋值会设置类属性。根据这个规则，对一个对象的属性进行赋值不会影响其类的属性。下面的例子说明了这个区别。</p>
+<p>如果我们给账户实例的命名属性 <code>interest</code> 赋值，我们将创建一个与现有类属性同名的新实例属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>kirk_account.interest = <span class="number">0.08</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>kirk_account.interest</span><br><span class="line"><span class="number">0.08</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>spock_account.interest</span><br><span class="line"><span class="number">0.04</span></span><br></pre></td></tr></table></figure>
+<p>对类属性 <code>interest</code> 的更改将影响 <code>spock_account</code> ，但实例属性 <code>kirk_account</code> 将不受影响。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Account.interest = <span class="number">0.05</span>  <span class="comment"># changing the class attribute</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>spock_account.interest     <span class="comment"># changes instances without like-named instance attributes</span></span><br><span class="line"><span class="number">0.05</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>kirk_account.interest     <span class="comment"># but the existing instance attribute is unaffected</span></span><br><span class="line"><span class="number">0.08</span></span><br></pre></td></tr></table></figure>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>在面向对象编程范式中，我们经常发现不同的类型之间存在关联。特别是，我们发现相似的类在其专业化程度上有所不同。两个类可能具有相似的属性，但其中一个表示另一个的特殊情况。</p>
+<p>例如，我们可能想要实现一个支票账户，它与标准账户不同。支票账户每次取款都会额外收取 1 美元，并且利率较低。在这里，我们展示了所需的行为。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>ch = CheckingAccount(<span class="string">&#x27;Spock&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ch.interest     <span class="comment"># Lower interest rate for checking accounts</span></span><br><span class="line"><span class="number">0.01</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ch.deposit(<span class="number">20</span>)  <span class="comment"># Deposits are the same</span></span><br><span class="line"><span class="number">20</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ch.withdraw(<span class="number">5</span>)  <span class="comment"># withdrawals decrease balance by an extra charge</span></span><br><span class="line"><span class="number">14</span></span><br></pre></td></tr></table></figure>
+<p>一个 <code>CheckingAccount</code> 是 <code>Account</code> 的一种特殊化。在面向对象编程术语中，通用账户将作为 <code>CheckingAccount</code> 的基类，而 <code>CheckingAccount</code> 将是 <code>Account</code> 的子类。（基类也可以用父类和超类来表示，而子类也可以用子类来表示。）</p>
+<p>子类继承其基类的属性，但可以覆盖某些属性，包括某些方法。通过继承，我们只需指定子类与基类之间的差异。在子类中未指定的任何内容都会自动假定与基类的行为相同。</p>
+<p>继承在我们的对象隐喻中也起着作用，除了作为一个有用的组织特性。继承的目的是表示类之间的是一个关系，与拥有关系相对应。支票账户是一种特定类型的账户，所以从一个账户继承是继承的适当用法。另一方面，银行有一个管理的银行账户列表，所以它们之间都不应该互相继承。相反，账户对象的列表自然地表达为银行对象的实例属性。</p>
+<h3 id="使用继承"><a href="#使用继承" class="headerlink" title="使用继承"></a>使用继承</h3><p>首先，我们给出了 <code>Account</code> 类的完整实现，其中包括类和其方法的文档字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">class</span> <span class="title class_">Account</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;A bank account that has a non-negative balance.&quot;&quot;&quot;</span></span><br><span class="line">        interest = <span class="number">0.02</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, account_holder</span>):</span><br><span class="line">            self.balance = <span class="number">0</span></span><br><span class="line">            self.holder = account_holder</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">deposit</span>(<span class="params">self, amount</span>):</span><br><span class="line">            <span class="string">&quot;&quot;&quot;Increase the account balance by amount and return the new balance.&quot;&quot;&quot;</span></span><br><span class="line">            self.balance = self.balance + amount</span><br><span class="line">            <span class="keyword">return</span> self.balance</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">withdraw</span>(<span class="params">self, amount</span>):</span><br><span class="line">            <span class="string">&quot;&quot;&quot;Decrease the account balance by amount and return the new balance.&quot;&quot;&quot;</span></span><br><span class="line">            <span class="keyword">if</span> amount &gt; self.balance:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&#x27;Insufficient funds&#x27;</span></span><br><span class="line">            self.balance = self.balance - amount</span><br><span class="line">            <span class="keyword">return</span> self.balance</span><br></pre></td></tr></table></figure>
+<p>下面是 <code>CheckingAccount</code> 的完整实现。我们通过在类名后面的括号中放置一个求值为基类的表达式来指定继承关系。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">class</span> <span class="title class_">CheckingAccount</span>(<span class="title class_ inherited__">Account</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;A bank account that charges for withdrawals.&quot;&quot;&quot;</span></span><br><span class="line">        withdraw_charge = <span class="number">1</span></span><br><span class="line">        interest = <span class="number">0.01</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">withdraw</span>(<span class="params">self, amount</span>):</span><br><span class="line">            <span class="keyword">return</span> Account.withdraw(self, amount + self.withdraw_charge)</span><br></pre></td></tr></table></figure>
+<p>在这里，我们引入了一个特定于 <code>CheckingAccount</code> 类的类属性 <code>withdraw_charge</code> 。我们给 <code>interest</code> 属性赋予了一个较低的值。我们还定义了一个新的 <code>withdraw</code> 方法来覆盖 <code>Account</code> 类中定义的行为。在类套件中没有进一步的语句时，所有其他行为都继承自基类 <code>Account</code> 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>checking = CheckingAccount(<span class="string">&#x27;Sam&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>checking.deposit(<span class="number">10</span>)</span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>checking.withdraw(<span class="number">5</span>)</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>checking.interest</span><br><span class="line"><span class="number">0.01</span></span><br></pre></td></tr></table></figure>
+<p>表达式 <code>checking.deposit</code> 的求值结果是一个绑定方法，用于进行存款操作，该方法在 <code>Account</code> 类中定义。当 Python 在点表达式中解析一个不是实例属性的名称时，它会在类中查找该名称。实际上，“查找”一个类中的名称会尝试在原始对象的类的继承链中的每个基类中找到该名称。我们可以递归地定义这个过程。在类中查找一个名称。</p>
+<ol>
+<li>如果名称是类中的属性，则返回属性值。</li>
+<li>否则，如果存在基类，则在基类中查找该名称。</li>
+</ol>
+<p>在 <code>deposit</code> 的情况下，Python首先会在实例中查找名称，然后在 <code>CheckingAccount</code> 类中查找。最后，它会在 <code>Account</code> 类中查找，其中定义了 <code>deposit</code> 。根据我们对点表达式的评估规则，由于 <code>deposit</code> 是在 <code>checking</code> 实例的类中查找的函数，点表达式的评估结果是一个绑定方法值。该方法使用参数10调用，这将使用 <code>self</code> 绑定到 <code>checking</code> 对象和 <code>amount</code> 绑定到10来调用存款方法。</p>
+<p>对象的类在整个过程中保持不变。即使在 <code>deposit</code> 类中找到了 <code>Account</code> 方法， <code>deposit</code> 也是使用绑定到 <code>self</code> 的 <code>CheckingAccount</code> 实例进行调用，而不是 <code>Account</code> 的实例。</p>
+<p><strong>调用祖先</strong>。通过类对象仍然可以访问已被覆盖的属性。例如，我们通过调用 <code>Account</code> 的 <code>withdraw</code> 方法并传入包含 <code>withdraw_charge</code> 的参数来实现 <code>CheckingAccount</code> 的 <code>withdraw</code> 方法。</p>
+<p>注意，我们调用的是 <code>self.withdraw_charge</code> 而不是等效的 <code>CheckingAccount.withdraw_charge</code> 。前者相对于后者的好处是，继承自 <code>CheckingAccount</code> 的类可能会覆盖提取费用。如果是这种情况，我们希望我们的 <code>withdraw</code> 实现能找到新值而不是旧值。</p>
+<p><strong>接口</strong>。在面向对象的程序中，不同类型的对象共享相同的属性名称是非常常见的。对象接口是一组属性和对这些属性的条件的集合。例如，所有账户必须具有接受数值参数的 <code>deposit</code> 和 <code>withdraw</code> 方法，以及一个 <code>balance</code> 属性。类 <code>Account</code> 和 <code>CheckingAccount</code> 都实现了这个接口。继承特别促进了这种方式的名称共享。在一些编程语言（如Java）中，接口实现必须显式声明。在其他语言（如Python、Ruby和Go）中，具有适当名称的任何对象都实现了一个接口。</p>
+<p>例如，假设我们办了一个彩票，我们希望向一系列账户中的每个账户存入5美元。以下实现不假设这些账户的类型，因此对于任何具有 <code>deposit</code> 方法的对象类型都同样适用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">deposit_all</span>(<span class="params">winners, amount=<span class="number">5</span></span>):</span><br><span class="line">        <span class="keyword">for</span> account <span class="keyword">in</span> winners:</span><br><span class="line">            account.deposit(amount)</span><br></pre></td></tr></table></figure>
+<p>上述的函数 <code>deposit_all</code> 只假设每个 <code>account</code> 都满足账户对象抽象，并且它将与任何其他实现了该接口的账户类一起工作。假设特定类的账户将违反账户对象抽象的抽象屏障。例如，以下实现不一定适用于新类型的账户：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">deposit_all</span>(<span class="params">winners, amount=<span class="number">5</span></span>):</span><br><span class="line">        <span class="keyword">for</span> account <span class="keyword">in</span> winners:</span><br><span class="line">            Account.deposit(account, amount)</span><br></pre></td></tr></table></figure>
+<h3 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h3><p>Python支持子类从多个基类继承属性的概念，这是一种称为多重继承的语言特性。</p>
+<p>假设我们有一个继承自 <code>Account</code> 的 <code>SavingsAccount</code> ，但每次客户存款时都会收取一小笔费用。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">class</span> <span class="title class_">SavingsAccount</span>(<span class="title class_ inherited__">Account</span>):</span><br><span class="line">        deposit_charge = <span class="number">2</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">deposit</span>(<span class="params">self, amount</span>):</span><br><span class="line">            <span class="keyword">return</span> Account.deposit(self, amount - self.deposit_charge)</span><br></pre></td></tr></table></figure>
+<p>然后，一个聪明的高管构想出一个账户，结合了 <code>AsSeenOnTVAccount</code> 和 <code>CheckingAccount</code> 的最佳特点：取款费用、存款费用和低利率。它既是支票账户又是储蓄账户！高管推理道：“如果我们建立它，有人会注册并支付所有这些费用。我们甚至会给他们一美元。”</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">class</span> <span class="title class_">AsSeenOnTVAccount</span>(CheckingAccount, SavingsAccount):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, account_holder</span>):</span><br><span class="line">            self.holder = account_holder</span><br><span class="line">            self.balance = <span class="number">1</span>           <span class="comment"># A free dollar!</span></span><br></pre></td></tr></table></figure>
+<p>实际上，这个实现是完整的。提款和存款都会产生费用，分别使用 <code>CheckingAccount</code> 和 <code>SavingsAccount</code> 中的函数定义。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>such_a_deal = AsSeenOnTVAccount(<span class="string">&quot;John&quot;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>such_a_deal.balance</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>such_a_deal.deposit(<span class="number">20</span>)            <span class="comment"># $2 fee from SavingsAccount.deposit</span></span><br><span class="line"><span class="number">19</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>such_a_deal.withdraw(<span class="number">5</span>)            <span class="comment"># $1 fee from CheckingAccount.withdraw</span></span><br><span class="line"><span class="number">13</span></span><br></pre></td></tr></table></figure>
+<p>非歧义引用按预期正确解析：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>such_a_deal.deposit_charge</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>such_a_deal.withdraw_charge</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>但是当引用不明确时呢，比如对同时在 <code>Account</code> 和 <code>CheckingAccount</code> 中定义的 <code>withdraw</code> 方法的引用？下面的图表描述了 <code>AsSeenOnTVAccount</code> 类的继承图。每个箭头指向一个子类到一个基类。</p>
+<p><img src="https://www.composingprograms.com/img/multiple_inheritance.png" alt="img"></p>
+<p>对于像这样的简单的“菱形”形状，Python 从左到右，然后向上解析名称。在这个例子中，Python 按顺序检查以下类中的属性名称，直到找到具有该名称的属性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AsSeenOnTVAccount, CheckingAccount, SavingsAccount, Account, <span class="built_in">object</span></span><br></pre></td></tr></table></figure>
+<p>对于继承顺序问题，没有正确的解决方案，因为有些情况下我们可能更喜欢给某些继承的类优先权。然而，任何支持多重继承的编程语言都必须以一致的方式选择某种顺序，以便语言的用户可以预测其程序的行为。</p>
+<p><strong>进一步阅读</strong>。Python 使用一种递归算法称为 C3 方法解析顺序来解析此名称。可以使用所有类上的 <code>mro</code> 方法查询任何类的方法解析顺序。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"># 计算机</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/cs61a/" rel="tag"># cs61a</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/06/%E5%BA%8F%E5%88%97/" rel="prev" title="序列">
+                  <i class="fa fa-angle-left"></i> 序列
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">马晓康</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"mhchem":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
